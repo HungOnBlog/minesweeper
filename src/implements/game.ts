@@ -33,7 +33,9 @@ export class MinesweeperGame implements IGame {
    * @param cols
    */
   private genEmptyBoard(rows: number, cols: number): number[][] {
-    const emptyBoard = new Array(rows).map(() => new Array(cols).fill(0));
+    const emptyBoard = new Array(rows)
+      .fill(0)
+      .map(() => new Array(cols).fill(0));
     return emptyBoard;
   }
 
@@ -163,6 +165,9 @@ export class MinesweeperGame implements IGame {
       this.flaggedCells,
       this.cursor,
     );
+    this.drawer.drawRemainingFlags(
+      this.numberOfMines - this.flaggedCells.length,
+    );
   }
 
   /**
@@ -266,6 +271,7 @@ export class MinesweeperGame implements IGame {
    * - Use 'ctrl+c' to exit.
    */
   private loop() {
+    this.startTimestamp = Date.now();
     this.timeLoopInterval = setInterval(() => {
       this.timeLoop();
     }, this.REDRAW_TIMESTAMP_INTERVAL_MS);
@@ -299,6 +305,7 @@ export class MinesweeperGame implements IGame {
       this.cursor[1] = Math.max(0, this.cursor[1]);
       this.cursor[1] = Math.min(this.board[0].length - 1, this.cursor[1]);
 
+      this.checkWin();
       this.drawer.draw(
         this.getCurrentSeconds(),
         this.board,
@@ -306,7 +313,6 @@ export class MinesweeperGame implements IGame {
         this.flaggedCells,
         this.cursor,
       );
-      this.checkWin();
       this.drawer.drawRemainingFlags(
         this.numberOfMines - this.flaggedCells.length,
       );
@@ -320,8 +326,8 @@ export class MinesweeperGame implements IGame {
    */
   private initializeBoard(boardRows: number, boardCols: number): void {
     this.board = this.genEmptyBoard(boardRows, boardCols);
-    this.board = this.placeMines(this.board, this.numberOfMines);
-    this.board = this.numericBoard(this.board);
+    this.board = this.placeMines([...this.board], this.numberOfMines);
+    this.board = this.numericBoard([...this.board]);
   }
 
   name(): string {
@@ -330,7 +336,10 @@ export class MinesweeperGame implements IGame {
 
   start(): void {
     console.log(this.LOGO);
-    [this.numberOfMines, this.boardRows, this.boardCols] = this.selectLevel();
+    const [mines, rows, cols] = this.selectLevel();
+    this.numberOfMines = mines;
+    this.boardRows = rows;
+    this.boardCols = cols;
     this.initializeBoard(this.boardRows, this.boardCols);
     this.loop();
   }

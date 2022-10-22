@@ -104,6 +104,7 @@ export class MinesweeperDrawer implements IMinesweeperDrawer {
     }
     console.log('You won! 🎉🎉🎉');
   }
+
   drawRemainingFlags(remainingFlags: number): void {
     console.log(`Remaining flags: 🚩x ${remainingFlags}`);
   }
