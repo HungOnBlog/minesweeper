@@ -11,14 +11,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HungTP-Play/blog.git"
+        "url": "git+https://github.com/HungOnBlog/minesweeper.git"
     },
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/HungTP-Play/blog/issues"
+        "url": "https://github.com/HungOnBlog/minesweeper/issues"
     },
-    "homepage": "https://github.com/HungTP-Play/blog#readme",
+    "homepage": "https://github.com/HungOnBlog/minesweeper#readme",
     "devDependencies": {
         "@types/jest": "^29.1.1",
         "@types/node": "^18.7.23",
