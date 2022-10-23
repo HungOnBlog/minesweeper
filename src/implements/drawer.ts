@@ -1,7 +1,7 @@
 import { IMinesweeperDrawer } from '../interfaces/drawer.interface';
 
 export class MinesweeperDrawer implements IMinesweeperDrawer {
-  NUMBERS: { [key: number]: string } = {
+  private NUMBERS: { [key: number]: string } = {
     1: '\x1b[34m1\x1b[0m',
     2: '\x1b[32m2\x1b[0m',
     3: '\x1b[31m3\x1b[0m',
